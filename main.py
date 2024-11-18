@@ -23,6 +23,18 @@ def init_chrome_driver() -> webdriver.Chrome:
     return driver
 
 
+# Pin the "Wappalyzer" extension to the toolbar
+def pin_extension_to_toolbar() -> None:
+    # Open the extension menu
+    find_and_click('icons/extensions.png')
+
+    # Click the "pin to toolbar" button
+    find_and_click('icons/pin.png')
+
+    # Close the extension menu
+    find_and_click('icons/extensions.png')
+
+
 # Find the related part matching the given image on the scrren and click it
 def find_and_click(img: str, offsetX: float = 0, offsetY: float = 0) -> None:
     # Initial variables
@@ -99,15 +111,11 @@ if __name__ == '__main__':
     driver.switch_to.window(driver.window_handles[1])
     driver.close()
 
-    # Go to the extensions page
+    # Go to the initial page
     driver.switch_to.window(driver.window_handles[0])
-    driver.get('chrome://extensions/')
 
-    # Click details button
-    find_and_click('icons/details_btn.png')
-
-    # Toggle on "pin to toolbar" function
-    find_and_click('icons/toggle.png')
+    # Pin the extension to the toolbar
+    pin_extension_to_toolbar()
 
     # Import all the URLs from the file
     with open('website_url_list.txt', encoding='utf-8') as f:
