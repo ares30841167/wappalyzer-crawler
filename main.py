@@ -15,6 +15,9 @@ def init_chrome_driver() -> webdriver.Chrome:
         'download.default_directory': f"{os.path.join(os.getcwd(), 'export')}"}
     chrome_options.add_experimental_option("prefs", prefs)
     chrome_options.add_extension('wappalyzer.crx')
+    chrome_options.add_argument("--disable-notifications")
+    chrome_options.add_argument('--ignore-certificate-errors')
+    chrome_options.add_argument('--ignore-ssl-errors')
     chrome_options.add_argument('--force-dark-mode')
     chrome_options.add_argument("--lang=zh_TW")
     driver = webdriver.Chrome(options=chrome_options)
