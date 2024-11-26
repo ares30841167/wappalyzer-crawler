@@ -82,6 +82,16 @@ def fetch_wappalyzer_data(url_list: list[str]) -> None:
         # Click wppalyzer extension
         find_and_click('icons/extensions.png', -40)
 
+        # If no tech detected, go to the next url
+        try:
+            # No tech detected
+            pyautogui.locateOnScreen('icons/unknown_tech.png', confidence=0.9)
+            # Close wppalyzer extension
+            find_and_click('icons/extensions.png', -40)
+            continue
+        except:
+            pass
+
         # Click the export button
         find_and_click('icons/wappalyzer_export.png')
 
